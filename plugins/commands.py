@@ -1,6 +1,6 @@
 import os
 from config import Config
-from .fonts import Fonts
+from plugins.fonts import Fonts
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
