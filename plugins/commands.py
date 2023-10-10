@@ -27,14 +27,14 @@ async def callback_query_handler(client, callback_query):
     data = callback_query.data   
     if data == "help":
         # Handle the "help" button callback
-        help_text = "Your name: {m.from_user.mention(style='md')}"
+        help_text = "Help text..."
         back_button = InlineKeyboardButton("Back", callback_data="back_help")
         keyboard = InlineKeyboardMarkup(inline_keyboard=[[back_button]])
         await callback_query.message.edit_text(text=help_text, reply_markup=keyboard)
         user_states[user_id] = "help"
     elif data == "back_help":
         # Handle the "Back" button from the Help menu
-        start_text = "Welcome to the Bot, {m.from_user.mention(style='md')}!\n\nI can help you with fonts. Just send me some text."
+        start_text = "Welcome to the Bot!\n\nI can help you with fonts. Just send me some text."
         buttons = [
             [InlineKeyboardButton("Developer", url="https://telegram.me/GenXNano"), InlineKeyboardButton("Help", callback_data="help")]
         ]
