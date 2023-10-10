@@ -4,38 +4,45 @@ from .fonts import Fonts
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+
+# Define a dictionary to track user states
+user_states = {}
+
+# Define a start command handler
 @Client.on_message(filters.command('start'))
 async def start(c, m):
     owner = await c.get_users(int(Config.OWNER_ID))
     owner_username = owner.username if owner.username else 'GenXNano'
-
-    # Inline Buttons
+    # Your start command handler code here
+    text = f"Welcome to the Font Bot, {message.from_user.mention(style='md')}!\n\nI can help you with fonts. Just send me some text."
     buttons = [
-        [
-            InlineKeyboardButton('Developer', url=f"https://telegram.me/riz4d"),
-            InlineKeyboardButton('Button 1', callback_data='button1_data'),
-            InlineKeyboardButton('Button 2', callback_data='button2_data')
-        ],
-        [  # Add two more buttons here
-            InlineKeyboardButton('Button 3', callback_data='button3_data'),
-            InlineKeyboardButton('Button 4', callback_data='button4_data')
-        ]
-
+        [InlineKeyboardButton("Developer", url="https://telegram.me/GenXNano"), InlineKeyboardButton("Help", callback_data="help")]
     ]
-        
-    image_url = "https://telegra.ph/file/1d2afc22c9cc7e52d07cc.jpg"  # Replace with the actual image URL
-    await m.reply_photo(
-        photo=image_url,
-        caption=f"""Hey! {m.from_user.mention(style='md')},
-    
-I am Campus Font Bot.
+    await message.reply_text(text=text, reply_markup=InlineKeyboardMarkup(buttons))
 
-I can help you get fonts. Just send me some text.
-""",
-        reply_markup=InlineKeyboardMarkup(buttons)
-    )
+# Define a callback query handler
+@app.on_callback_query()
+async def callback_query_handler(client, callback_query):
+    user_id = callback_query.from_user.id
+    data = callback_query.data   
+    if data == "help":
+        # Handle the "help" button callback
+        help_text = "You've clicked the 'Help' button! How can I assist you?"
+        back_button = InlineKeyboardButton("Back", callback_data="back_help")
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[[back_button]])
+        await callback_query.message.edit_text(text=help_text, reply_markup=keyboard)
+        user_states[user_id] = "help"
+    elif data == "back_help":
+        # Handle the "Back" button from the Help menu
+        start_text = "Welcome back to the Help menu. How can I assist you?"
+        buttons = [
+            [InlineKeyboardButton("Developer", url="https://telegram.me/GenXNano"), InlineKeyboardButton("Help", callback_data="help")]
+        ]
+        await callback_query.message.edit_text(text=start_text, reply_markup=InlineKeyboardMarkup(buttons))
+        user_states[user_id] = "start"
 
-
+if __name__ == "__main__":
+    app.run()
 
 
 @Client.on_message(filters.private & filters.incoming & filters.text)
