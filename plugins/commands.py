@@ -4,29 +4,43 @@ from .fonts import Fonts
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+from pyrogram import filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 @Client.on_message(filters.command('start'))
 async def start(c, m):
     owner = await c.get_users(int(Config.OWNER_ID))
     owner_username = owner.username if owner.username else 'GenXNano'
 
-    # start text
-    text = f"""Hey! {m.from_user.mention(style='md')},
+    # Start text
+    text = 
 
- ** I am Campus Font Bot**
-
-`I can help you to get fonts. Just send me some text.`
-"""
-
-    # Buttons
+    # Inline Buttons
     buttons = [
         [
-            InlineKeyboardButton('Developer', url=f"GenXNano.t.me")
+            InlineKeyboardButton('Developer', url=f"https://telegram.me/riz4d"),
+            InlineKeyboardButton('Button 1', callback_data='button1_data'),
+            InlineKeyboardButton('Button 2', callback_data='button2_data')
+        ],
+        [  # Add two more buttons here
+            InlineKeyboardButton('Button 3', callback_data='button3_data'),
+            InlineKeyboardButton('Button 4', callback_data='button4_data')
         ]
+
     ]
-    await m.reply_text(
-        text=text,
+        
+    image_url = "https://example.com/your_image_url.jpg"  # Replace with the actual image URL
+    await m.reply_photo(
+        photo=image_url,
+        caption=f"""Hey! {m.from_user.mention(style='md')},
+    
+I am Campus Font Bot.
+
+I can help you get fonts. Just send me some text.
+""",
         reply_markup=InlineKeyboardMarkup(buttons)
     )
+
 
 
 
