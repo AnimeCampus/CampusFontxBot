@@ -1,6 +1,6 @@
 import os
 from config import Config
-from plugins.fonts import Fonts
+from .fonts import Fonts
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
@@ -30,13 +30,15 @@ async def start(c, m):
 async def callback_query_handler(client, callback_query):
     user_id = callback_query.from_user.id
     data = callback_query.data   
+
     if data == "help":
         # Handle the "help" button callback
-        help_text = "Help text..."
+        help_text = "**🌟 Welcome to the Campus Font Bot! 🌟**\n\nLooking to spice up your text messages with some unique fonts? You're in the right place! Our bot can transform your plain text into cool and eye-catching fonts. It's super easy to use!\n\n**📝 How to Use:**\n\n1. Start a chat with this bot.\n2. Simply send the text you want to convert into cool fonts as a message.\n3. Wait for the magic to happen! The bot will send your text back in a variety of cool fonts.\n4. Copy the font you like and paste it into your chats, captions, or wherever you want to impress your friends.\n\nFeel free to send as many messages as you like. Experiment and have fun!"
         back_button = InlineKeyboardButton("◍ Bᴀᴄᴋ ◍", callback_data="back_help")
         keyboard = InlineKeyboardMarkup(inline_keyboard=[[back_button]])
         await callback_query.message.edit_text(text=help_text, reply_markup=keyboard)
         user_states[user_id] = "help"
+
     elif data == "back_help":
         # Handle the "Back" button from the Help menu
         start_text = "Welcome to the Bot!\n\nI can help you with fonts. Just send me some text."
