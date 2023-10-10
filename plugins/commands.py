@@ -215,5 +215,5 @@ async def style(c, m):
     new_text = cls(m.message.reply_to_message.text)
     try:
         await m.message.edit_text(new_text, reply_markup=m.message.reply_markup)
-    except:
-        pass
+    except Exception as e:
+            print(f"Error editing text: {str(e)}")
