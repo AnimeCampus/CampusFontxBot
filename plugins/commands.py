@@ -41,10 +41,6 @@ async def callback_query_handler(client, callback_query):
         await callback_query.message.edit_text(text=start_text, reply_markup=InlineKeyboardMarkup(buttons))
         user_states[user_id] = "start"
 
-if __name__ == "__main__":
-    app.run()
-
-
 @Client.on_message(filters.private & filters.incoming & filters.text)
 async def style_buttons(c, m, cb=False):
     buttons = [[
