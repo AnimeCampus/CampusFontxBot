@@ -24,4 +24,5 @@ if __name__ == "__main__" :
         plugins=plugins,
         workers=100
     )
-    app.run()
+print("started")
+app.run()
