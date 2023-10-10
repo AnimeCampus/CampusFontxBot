@@ -9,9 +9,6 @@ async def start(c, m):
     owner = await c.get_users(int(Config.OWNER_ID))
     owner_username = owner.username if owner.username else 'GenXNano'
 
-    # Start text
-    text = 
-
     # Inline Buttons
     buttons = [
         [
@@ -26,7 +23,7 @@ async def start(c, m):
 
     ]
         
-    image_url = "https://example.com/your_image_url.jpg"  # Replace with the actual image URL
+    image_url = "https://telegra.ph/file/1d2afc22c9cc7e52d07cc.jpg"  # Replace with the actual image URL
     await m.reply_photo(
         photo=image_url,
         caption=f"""Hey! {m.from_user.mention(style='md')},
