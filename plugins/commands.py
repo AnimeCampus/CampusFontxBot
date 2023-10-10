@@ -21,7 +21,7 @@ async def start(c, m):
     await message.reply_text(text=text, reply_markup=InlineKeyboardMarkup(buttons))
 
 # Define a callback query handler
-@app.on_callback_query()
+@Client.on_callback_query()
 async def callback_query_handler(client, callback_query):
     user_id = callback_query.from_user.id
     data = callback_query.data   
