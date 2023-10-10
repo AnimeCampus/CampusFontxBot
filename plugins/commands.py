@@ -18,7 +18,7 @@ async def start(c, m):
     buttons = [
         [InlineKeyboardButton("Developer", url="https://telegram.me/GenXNano"), InlineKeyboardButton("Help", callback_data="help")]
     ]
-    await message.reply_text(text=text, reply_markup=InlineKeyboardMarkup(buttons))
+    await m.reply_text(text=text, reply_markup=InlineKeyboardMarkup(buttons))
 
 # Define a callback query handler
 @Client.on_callback_query()
