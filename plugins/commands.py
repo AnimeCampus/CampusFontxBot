@@ -14,7 +14,7 @@ async def start(c, m):
     owner = await c.get_users(int(Config.OWNER_ID))
     owner_username = owner.username if owner.username else 'GenXNano'
     # Your start command handler code here
-    text = f"Welcome to the Font Bot, {message.from_user.mention(style='md')}!\n\nI can help you with fonts. Just send me some text."
+    text = f"Welcome to the Font Bot, {m.from_user.mention(style='md')}!\n\nI can help you with fonts. Just send me some text."
     buttons = [
         [InlineKeyboardButton("Developer", url="https://telegram.me/GenXNano"), InlineKeyboardButton("Help", callback_data="help")]
     ]
@@ -30,7 +30,7 @@ async def callback_query_handler(client, callback_query):
         help_text = "You've clicked the 'Help' button! How can I assist you?"
         back_button = InlineKeyboardButton("Back", callback_data="back_help")
         keyboard = InlineKeyboardMarkup(inline_keyboard=[[back_button]])
-        await callback_query.message.edit_text(text=help_text, reply_markup=keyboard)
+        await callback_query.m.edit_text(text=help_text, reply_markup=keyboard)
         user_states[user_id] = "help"
     elif data == "back_help":
         # Handle the "Back" button from the Help menu
@@ -38,7 +38,7 @@ async def callback_query_handler(client, callback_query):
         buttons = [
             [InlineKeyboardButton("Developer", url="https://telegram.me/GenXNano"), InlineKeyboardButton("Help", callback_data="help")]
         ]
-        await callback_query.message.edit_text(text=start_text, reply_markup=InlineKeyboardMarkup(buttons))
+        await callback_query.m.edit_text(text=start_text, reply_markup=InlineKeyboardMarkup(buttons))
         user_states[user_id] = "start"
 
 @Client.on_message(filters.private & filters.incoming & filters.text)
