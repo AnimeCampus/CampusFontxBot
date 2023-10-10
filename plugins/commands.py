@@ -18,7 +18,7 @@ async def start(c, m):
     buttons = [
         [
             InlineKeyboardButton("◍ Sᴜᴘᴘᴏʀᴛ ◍", url="https://telegram.me/GenXNano"),
-        ]
+        ],
         [
             InlineKeyboardButton("◍ Hᴇʟᴘ ◍", callback_data="help"),
         ]
@@ -43,7 +43,7 @@ async def callback_query_handler(client, callback_query):
         buttons = [
             [
                 InlineKeyboardButton("◍ Sᴜᴘᴘᴏʀᴛ ◍", url="https://telegram.me/GenXNano"),
-            ]
+            ],
             [
                 InlineKeyboardButton("◍ Hᴇʟᴘ ◍", callback_data="help"),
             ]
